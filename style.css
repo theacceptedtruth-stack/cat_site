@@ -1,0 +1,227 @@
+/* ============================================================
+   style.css — внешний вид сайта «Мои коты»
+   Синтаксис CSS:  селектор { свойство: значение; }
+   Селектор — кому применить стиль (тег, класс с точкой, id с #).
+   ============================================================ */
+
+/* ---------- БАЗОВЫЕ НАСТРОЙКИ ---------- */
+
+/* * — применить ко ВСЕМ элементам. box-sizing, чтобы отступы
+   не увеличивали размеры блоков (стандартная строчка-привычка) */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;                      /* убрать отступ браузера по умолчанию */
+    font-family: Arial, sans-serif;
+    background-color: #f5ede3;      /* нейтральный тёплый фон страницы */
+    color: #333;
+    line-height: 1.6;               /* межстрочный интервал */
+}
+
+/* ---------- ШАПКА ---------- */
+
+header {
+    background-color: #e8874a;      /* рыжий акцент */
+    color: #fff;
+    text-align: center;
+    padding: 30px 15px;             /* отступы: 30 сверху/снизу, 15 слева/справа */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.subtitle {
+    margin: 10px 0 0;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* ---------- ОСНОВНОЕ СОДЕРЖИМОЕ ---------- */
+
+main {
+    max-width: 1000px;   /* контент не растягивается на весь широкий монитор */
+    margin: 0 auto;      /* auto слева/справа = центрирование */
+    padding: 20px;
+}
+
+section {
+    margin: 30px 0;
+}
+
+/* h2 — заголовки разделов, h3 — подзаголовки внутри половин */
+h2 {
+    color: #c96a2f;
+    border-bottom: 2px solid #f0c9a8;
+    padding-bottom: 6px;
+}
+
+h3 {
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* ============================================================
+   ДВЕ ПОЛОВИНЫ СТРАНИЦЫ
+   section.cats из HTML — flex-контейнер: дочерние элементы
+   (две section.half) выстроятся в РЯД.
+   ============================================================ */
+
+main {
+    display: flex;        /* main становится flex-контейнером */
+    flex-wrap: wrap;      /* если не влезают — переносятся на новую строку */
+    gap: 20px;            /* расстояние между колонками */
+    align-items: stretch; /* колонки одной высоты */
+}
+
+/* ВНИМАНИЕ: из-за display:flex на main отступы section выше
+   теперь задаём так: полноширинные секции занимают 100% строки */
+.facts,
+.feedback {
+    flex: 100%;           /* ширина в 100% от строки flex-контейнера */
+    margin: 0;            /* отступ между колонками уже делает gap у main */
+}
+
+/* .half — общий стиль обеих половин (карточка с отступами) */
+.half {
+    flex: 1;              /* занять РОВНО ПОЛОВИНУ свободного места */
+    min-width: 300px;     /* но не уже 300px — иначе перестроится под широкую */
+    border-radius: 12px;
+    padding: 20px;
+    margin: 0;            /* gap у main обеспечивает расстояние */
+}
+
+/* Получилось: main flex -> .half flex:1+flex:1 = две равные половины.
+   На узком экране min-width сработает, и они встанут друг под другом. */
+
+/* ПОЛОВИНА Ичиго — рыжая */
+.half-ginger {
+    background-color: #fbe3c8;      /* светло-рыжий фон */
+    border: 3px solid #e8874a;    /* рыжая рамка */
+}
+
+.half-ginger h2 { color: #b45309; border-color: #e8874a; }
+
+/* ПОЛОВИНА СЕРОГО — шоколадная */
+.half-choco {
+    background-color: #e9ddd3;      /* светло-шоколадный фон */
+    border: 3px solid #6b4a34;      /* тёмно-шоколадная рамка */
+}
+
+.half-choco h2 { color: #6b4a34; border-color: #a67b5b; }
+
+/* Подпись под именем кота */
+.breed {
+    color: #777;
+    margin-top: 0;
+}
+
+/* ---------- ФОТО ---------- */
+
+/* Фото внутри половин — по ширине колонки, со скруглением */
+.cat-photo {
+    display: block;         /* картинка как блок — с новой строки */
+    width: 100%;          /* на всю ширину колонки */
+    border-radius: 10px;
+    margin-bottom: 15px;  /* отступ до следующего фото */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* лёгкая тень */
+}
+
+/* Фото обоих котов — на всю ширину секции */
+.both-photo {
+    display: block;
+    max-width: 600px;     /* не слишком огромное */
+    width: 100%;
+    margin: 15px auto;    /* auto = центрирование по горизонтали */
+    border-radius: 10px;
+    border: 3px solid #e8874a;
+}
+
+/* ---------- СПИСКИ ---------- */
+
+ul, ol {
+    padding-left: 25px;
+    margin: 10px 0;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* ---------- ССЫЛКИ ---------- */
+
+a { color: #c96a2f; }
+
+a:hover {                 /* стиль при наведении мыши */
+    color: #9c4f1c;
+    text-decoration: none;
+}
+
+/* ---------- ФОРМА ---------- */
+
+.hint {
+    color: #777;
+    font-size: 14px;
+    margin-top: 0;
+}
+
+/* стилизуем поля ввода (input и textarea) одним блоком */
+input,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+input:focus,
+textarea:focus {            /* стиль активного поля (курсор внутри) */
+    border-color: #e8874a;
+    outline: none;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* абзац для сообщения об ошибке — красный, место заранее зарезервировано */
+.error {
+    color: #d33;
+    font-weight: bold;
+    min-height: 20px;
+    margin: 0 0 10px;
+}
+
+button {
+    background-color: #e8874a;
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    font-size: 17px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c96a2f;
+}
+
+/* ---------- ПОДВАЛ ---------- */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+}
+
+footer p { margin: 0; }
